@@ -1,0 +1,30 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                sofa
+
+set year 2012
+set month 03
+set day 01
+set rev a
+version             ${year}-${month}-${day}
+
+categories          science devel
+platforms           darwin
+maintainers         larryv
+
+description         SOFA Library for ANSI C
+long_description    An accessible and authoritative set of algorithms \
+                    and procedures that implement standard models used \
+                    in fundamental astronomy.
+# TODO: Double-check this.
+license             Permissive
+
+
+homepage            http://www.iausofa.org/
+master_sites        http://www.iausofa.org/${year}_${month}${day}_C/
+distname            sofa_c-${year}${month}${day}_${rev}
+checksums           rmd160  1b1924575adfb2f2ac10eb9ba017e369eea1058d \
+                    sha256  3534538b4abda067ef07f1aaef869f3b72ddc7f246447558b708d2968e63e66f 
