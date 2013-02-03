@@ -54,9 +54,10 @@ package provide macports_dlist 1.0
 # pending, success} respectively.
 
 # dlist_match_multi
-# Returns all dependency entries for which the entry's value for 'key' exactly matches the given 'value'.
-#	dlist - the dependency list to search
-#	criteria - the key/value pairs to compare
+# Returns all dependency entries for which the entry's value for 'key'
+# exactly matches the given 'value'.
+#       dlist - the dependency list to search
+#       criteria - the key/value pairs to compare
 
 proc dlist_match_multi {dlist criteria} {
 	set result {}
@@ -77,9 +78,9 @@ proc dlist_match_multi {dlist criteria} {
 
 # dlist_search
 # Returns all dependency entries whose 'key' contains 'value'.
-#	dlist - the dependency list to search
-#	key   - the key to compare: Requires, Provides, et al.
-#	value - the value to compare
+#       dlist - the dependency list to search
+#       key   - the key to compare: Requires, Provides, et al.
+#       value - the value to compare
 
 proc dlist_search {dlist key value} {
 	set result {}
@@ -93,8 +94,8 @@ proc dlist_search {dlist key value} {
 
 # dlist_delete
 # Deletes the specified ditem from the dlist.
-#	dlist - the list to search
-#	ditem - the item to delete
+#       dlist - the list to search
+#       ditem - the item to delete
 proc dlist_delete {dlist ditem} {
     upvar $dlist uplist
     set ix [lsearch -exact $uplist $ditem]
@@ -107,8 +108,8 @@ proc dlist_delete {dlist ditem} {
 # Returns true if the dlist contains ditems
 # which will provide one of the specified names,
 # and thus are still "pending".
-#	dlist  - the dependency list to search
-#	tokens - the list of pending tokens to check for
+#       dlist  - the dependency list to search
+#       tokens - the list of pending tokens to check for
 
 proc dlist_has_pending {dlist tokens} {
 	foreach token $tokens {
@@ -153,9 +154,9 @@ proc ditem_delete {ditem} {
 
 # ditem_key
 # Sets and returns the given key of the dependency item.
-#	ditem - the dependency item to operate on
-#	key   - the key to set
-#	value - optional value to set the key to
+#       ditem - the dependency item to operate on
+#       key   - the key to set
+#       value - optional value to set the key to
 
 proc ditem_key {ditem args} {
 	set nbargs [llength $args]
@@ -170,9 +171,9 @@ proc ditem_key {ditem args} {
 
 # ditem_append
 # Appends the value to the given key of the dependency item.
-#	ditem - the dependency item to operate on
-#	key   - the key to append to
-#	value - the value to append to the key
+#       ditem - the dependency item to operate on
+#       key   - the key to append to
+#       value - the value to append to the key
 
 proc ditem_append {ditem key args} {
 	eval "return \[macports_dlist::ditem_append $ditem $key $args\]"
@@ -181,9 +182,9 @@ proc ditem_append {ditem key args} {
 # ditem_append_unique
 # Appends the value to the given key of the dependency item if
 # they were not there yet.
-#	ditem - the dependency item to operate on
-#	key   - the key to append to
-#	value - the value to append to the key
+#       ditem - the dependency item to operate on
+#       key   - the key to append to
+#       value - the value to append to the key
 
 proc ditem_append_unique {ditem key args} {
 	eval "return \[macports_dlist::ditem_append_unique $ditem $key $args\]"
@@ -192,18 +193,18 @@ proc ditem_append_unique {ditem key args} {
 # ditem_contains
 # Tests whether the ditem key contains the specified value;
 # or if the value is omitted, tests whether the key exists.
-#	ditem - the dependency item to test
-#	key   - the key to examine
-#	value - optional value to search for in the key
+#       ditem - the dependency item to test
+#       key   - the key to examine
+#       value - optional value to search for in the key
 proc ditem_contains {ditem key args} {
 	eval "return \[macports_dlist::ditem_contains $ditem $key $args\]"
 }
 
 # dlist_append_dependents
 # Returns the ditems which are dependents of the ditem specified.
-#	dlist - the dependency list to search
-#	ditem - the item which itself, and its dependents should be selected
-#	result - used for recursing, pass empty initially.
+#       dlist - the dependency list to search
+#       ditem - the item which itself, and its dependents should be selected
+#       result - used for recursing, pass empty initially.
 
 proc dlist_append_dependents {dlist ditem result} {
 	# Only append things if the root item is not in the list.
@@ -233,9 +234,9 @@ proc dlist_append_dependents {dlist ditem result} {
 # on unfulfilled tokens in the Uses key.  However these items
 # will eventually be returned if there are no alternatives.
 # Soft-dependencies can be implemented in this way.
-#	dlist      - the dependency list to select from
-#	statusdict - the status dictionary describing the history
-#	             of the dependency list.
+#       dlist      - the dependency list to select from
+#       statusdict - the status dictionary describing the history
+#                    of the dependency list.
 
 proc dlist_get_next {dlist statusdict} {
 	upvar $statusdict upstatus
@@ -278,14 +279,14 @@ proc dlist_get_next {dlist statusdict} {
 # ditems are eligible to run (the selector returns {}) then
 # dlist_eval will exit with a list of the remaining ditems,
 # or {} if all ditems were evaluated.
-#	dlist    - the dependency list to evaluate
-#	testcond - test condition to populate the status dictionary
-#	           should return {-1, 0, 1}
-#	handler  - the handler to invoke on each ditem
-#	canfail  - If 1, then progress will not stop when a failure
-#	           occures; if 0, then dlist_eval will return on the
-#	           first failure
-#	selector - the selector for determining eligibility
+#       dlist    - the dependency list to evaluate
+#       testcond - test condition to populate the status dictionary
+#                  should return {-1, 0, 1}
+#       handler  - the handler to invoke on each ditem
+#       canfail  - If 1, then progress will not stop when a failure
+#                  occures; if 0, then dlist_eval will return on the
+#                  first failure
+#       selector - the selector for determining eligibility
 
 proc dlist_eval {dlist testcond handler {canfail "0"} {selector "dlist_get_next"}} {
 	array set statusdict [list]
