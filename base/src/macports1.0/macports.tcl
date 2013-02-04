@@ -1291,6 +1291,7 @@ proc macports::worker_init {workername portpath porturl portbuildpath options va
     $workername alias registry_active registry::active
     $workername alias registry_file_registered registry::file_registered
     $workername alias registry_port_registered registry::port_registered
+    $workername alias registry_list_depends registry::list_depends
 
     # deferred options processing.
     $workername alias getoption macports::getoption
@@ -1729,6 +1730,10 @@ proc _mportsearchpath {depregex search_path {executable 0} {return_match 0}} {
                 set found 1
                 break
             }
+        }
+
+        if {$found} {
+            break
         }
     }
     if {$return_match} {
