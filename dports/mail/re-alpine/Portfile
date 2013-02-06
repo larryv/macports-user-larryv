@@ -1,0 +1,22 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                re-alpine
+version             2.03
+categories          mail
+platforms           darwin
+maintainers         larryv
+license             Apache-2
+
+description         The continuation of the Alpine email client
+long_description    The continuation of the Alpine email client from \
+                    University of Washington.
+
+homepage            http://sourceforge.net/projects/re-alpine/
+master_sites        sourceforge:project/re-alpine
+
+use_bzip2           yes
+checksums           rmd160  a541d93007bc859bf7ebf481fb5a8ccd0df0b551 \
+                    sha256  70d9324b2a93a5c268a3f8b05449d33e1c79acd23d1bce2a9d95b334d7bfba87
