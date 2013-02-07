@@ -20,3 +20,12 @@ master_sites        sourceforge:project/re-alpine
 use_bzip2           yes
 checksums           rmd160  a541d93007bc859bf7ebf481fb5a8ccd0df0b551 \
                     sha256  70d9324b2a93a5c268a3f8b05449d33e1c79acd23d1bce2a9d95b334d7bfba87
+
+configure.args      --disable-nls \
+                    --without-libiconv-prefix \
+                    --without-libintl-prefix \
+                    --without-ssl \
+                    --without-krb5 \
+                    --without-ldap \
+                    --without-tcl \
+                    --with-c-client-target=oxp
