@@ -15,7 +15,7 @@
 # 3. Neither the name of The MacPorts Project nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -39,7 +39,7 @@ namespace eval macports_util {
     ###################
     proc method_wrap {name} {
         variable argdefault
-    
+
         set name [list $name]
         # reconstruct the args list
         set args [uplevel 1 [subst -nocommands {info args $name}]]
@@ -109,7 +109,7 @@ proc ldindex {varName args} {
         if {${badrange?}} {
             error "list index out of range"
         }
-    
+
         if {[llength $args] > 1} {
             set list [uplevel 1 [subst -nocommands {lindex [set $varName] $idx}]]
             set item [eval ldindex list [lrange $args 1 end]]
