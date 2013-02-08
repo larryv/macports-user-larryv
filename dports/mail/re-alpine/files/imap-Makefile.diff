@@ -1,0 +1,10 @@
+--- imap/Makefile.orig	2012-12-20 23:06:57.000000000 -0500
++++ imap/Makefile	2013-02-08 03:30:10.000000000 -0500
+@@ -419,7 +419,6 @@
+ 	$(TOUCH) ip6
+ 	$(BUILD) BUILDTYPE=osx IP=$(IP6) EXTRAAUTHENTICATORS="$(EXTRAAUTHENTICATORS) gss" \
+ 	PASSWDTYPE=pam \
+-	EXTRACFLAGS="$(EXTRACFLAGS) -DMAC_OSX_KLUDGE=1" \
+ 	SPECIALS="SSLINCLUDE=/usr/include/openssl SSLLIB=/usr/lib SSLCERTS=/System/Library/OpenSSL/certs SSLKEYS=/System/Library/OpenSSL/private GSSINCLUDE=/usr/include GSSLIB=/usr/lib PAMDLFLAGS=-lpam"
+ 
+ osx:	osxok an
