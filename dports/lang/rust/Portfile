@@ -64,6 +64,7 @@ post-patch {
 }
 
 configure.args      --disable-docs \
+                    --enable-local-rust \
                     --local-rust-root=${workpath}/rust-stage0
 
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
