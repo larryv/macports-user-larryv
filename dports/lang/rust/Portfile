@@ -20,9 +20,42 @@ long_description    This is a compiler for Rust, including standard \
                     libraries, tools and documentation.
 homepage            http://www.rust-lang.org
 
-master_sites        http://dl.rust-lang.org/dist
-checksums           rmd160  b4988da7be984aa1337f4076e96e6d0c72e3170d \
-                    sha256  d326d22707f0562d669c11efbc33ae812ddbf76ab78f07087fc5beb095a8928a
+
+# Main distribution
+master_sites        http://dl.rust-lang.org/dist:dist
+distfiles           ${distname}${extract.suffix}:dist
+checksums           ${distname}${extract.suffix} \
+                        rmd160  b4988da7be984aa1337f4076e96e6d0c72e3170d \
+                        sha256  d326d22707f0562d669c11efbc33ae812ddbf76ab78f07087fc5beb095a8928a
+
+# stage0 snapshot compilers
+master_sites-append http://static.rust-lang.org/stage0-snapshots:stage0
+depends_extract     bin:bzip2:bzip2
+switch ${configure.build_arch} {
+    i386 {
+        set stage0(platform)    macos-i386
+        set stage0(hash)        151ff211c01f0b7a1895b93ff0bc021bf1472346
+        set stage0(rmd160)      300b17458073a8704817821bd5406189a264f765
+        set stage0(sha256)      5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
+    }
+    x86_64 {
+        set stage0(platform)    macos-x86_64
+        set stage0(hash)        e4564933f11b17f7dbd25b61032233693da21dc5
+        set stage0(rmd160)      3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
+        set stage0(sha256)      a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
+    }
+}
+set stage0(dist) rust-stage0-2012-12-19-8554d5e-${stage0(platform)}-${stage0(hash)}.tar.bz2
+distfiles-append    ${stage0(dist)}:stage0
+checksums-append    ${stage0(dist)} \
+                        rmd160  ${stage0(rmd160)} \
+                        sha256  ${stage0(sha256)}
+extract.only-delete ${stage0(dist)}
+post-extract {
+    set expand "bzip2 -dc ${distpath}/${stage0(dist)}"
+    set untar "${portutil::autoconf::tar_command} -xf -"
+    system -W ${workpath} "${expand} | ${untar}"
+}
 
 patchfiles          patch-configure.diff
 post-patch {
@@ -30,7 +63,8 @@ post-patch {
         ${worksrcpath}/configure
 }
 
-configure.args      --disable-docs
+configure.args      --disable-docs \
+                    --local-rust-root=${workpath}/rust-stage0
 
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     apple-gcc-4.0 apple-gcc-4.2 \
