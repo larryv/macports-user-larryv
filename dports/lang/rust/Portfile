@@ -10,6 +10,8 @@ revision            2
 categories          lang devel
 platforms           darwin
 supported_archs     i386 x86_64
+# https://github.com/mozilla/rust/issues/2024
+universal_variant   no
 license             {MIT Apache-2} BSD zlib NCSA Permissive
 maintainers         g5pw openmaintainer
 
@@ -47,9 +49,6 @@ if {${configure.compiler} == "macports-clang-3.2"} {
 if {[string match *clang* ${configure.compiler}]} {
     configure.args-append   --enable-clang
 }
-
-configure.universal_args-delete \
-                    --disable-dependency-tracking
 
 # There's a makefile that ignores the configure script CC options, this makes \
 # it behave.
