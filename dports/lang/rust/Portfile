@@ -60,7 +60,8 @@ post-extract {
     system -W ${workpath} "${expand} | ${untar}"
 }
 
-patchfiles          patch-configure.diff
+patchfiles          patch-configure.diff \
+                    patch-src-etc-local_stage0.sh.diff
 post-patch {
     reinplace "s/__BUILD_ARCH__/${configure.build_arch}/g" \
         ${worksrcpath}/configure
@@ -96,8 +97,6 @@ if {[string match *clang* ${configure.compiler}]} {
     build.args-delete       CPP=${configure.cpp}
     build.args-append       CPP="${configure.cc} -E"
 }
-
-use_parallel_build  no
 
 variant llvm30 conflicts llvm31 llvm32 llvm33 description {Use LLVM 3.0} {
     depends_lib-append      port:llvm-3.0
