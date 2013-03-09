@@ -83,13 +83,13 @@ if {${configure.compiler} == "macports-clang-3.2"} {
 
 if {[string match *clang* ${configure.compiler}]} {
     configure.args-append   --enable-clang
+    build.args-append       CPP="${configure.cc} -E"
+} else {
+    build.args-append       CPP=${configure.cpp}
 }
 
-# There's a makefile that ignores the configure script CC options, this makes \
-# it behave.
 build.args-append   CC=${configure.cc} \
                     CXX=${configure.cxx} \
-                    CPP=${configure.cpp} \
                     VERBOSE=1
 use_parallel_build  no
 
