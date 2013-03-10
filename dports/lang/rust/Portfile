@@ -87,39 +87,16 @@ configure.args      --disable-docs \
                     --enable-local-rust \
                     --local-rust-root=${workpath}/rust-stage0
 
-build.args          CC=${configure.cc} \
-                    CXX=${configure.cxx} \
-                    CPP=${configure.cpp} \
-                    VERBOSE=1
-
 if {[string match *clang* ${configure.compiler}]} {
     configure.args-append   --enable-clang
-    build.args-delete       CPP=${configure.cpp}
-    build.args-append       CPP="${configure.cc} -E"
 }
 
-variant llvm30 conflicts llvm31 llvm32 llvm33 description {Use LLVM 3.0} {
-    depends_lib-append      port:llvm-3.0
-    configure.args-append   --llvm-root=${prefix}/libexec/llvm-3.0
-}
-variant llvm31 conflicts llvm30 llvm32 llvm33 description {Use LLVM 3.1} {
-    depends_lib-append      port:llvm-3.1
-    configure.args-append   --llvm-root=${prefix}/libexec/llvm-3.1
-}
-variant llvm32 conflicts llvm30 llvm31 llvm33 description {Use LLVM 3.2} {
-    depends_lib-append      port:llvm-3.2
-    configure.args-append   --llvm-root=${prefix}/libexec/llvm-3.2
-}
-variant llvm33 conflicts llvm30 llvm31 llvm32 description {Use LLVM 3.3} {
-    depends_lib-append      port:llvm-3.3
-    configure.args-append   --llvm-root=${prefix}/libexec/llvm-3.3
-}
+build.args          CC=${configure.cc} \
+                    CXX=${configure.cxx} \
+                    CPP="${configure.cc} -E" \
+                    VERBOSE=1
 
-if {![variant_isset llvm30] && ![variant_isset llvm31] &&
-    ![variant_isset llvm33]
-} then {
-    default_variants    +llvm32
-}
+destroot.args       VERBOSE=1
 
 livecheck.url       ${homepage}/
 livecheck.regex     "/release-(\\d\.\\d)/"
