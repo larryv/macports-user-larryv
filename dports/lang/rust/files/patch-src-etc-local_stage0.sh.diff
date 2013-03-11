@@ -1,0 +1,7 @@
+--- src/etc/local_stage0.sh.orig	2012-12-18 18:29:12.000000000 -0500
++++ src/etc/local_stage0.sh	2013-03-09 17:26:42.000000000 -0500
+@@ -46,3 +46,4 @@
+ cp ${PREFIX}/lib/librust*${LIB_SUF} ${TARG_DIR}/stage0/${LIBDIR}/
+ cp ${PREFIX}/lib/libcore*${LIB_SUF} ${TARG_DIR}/stage0/${LIBDIR}/
+ cp ${PREFIX}/lib/libstd*${LIB_SUF} ${TARG_DIR}/stage0/${LIBDIR}/
++cp ${PREFIX}/lib/libsyntax*${LIB_SUF} ${TARG_DIR}/stage0/${LIBDIR}/

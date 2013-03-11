@@ -6,40 +6,40 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                rust
 version             0.5
-revision            2
+revision            3
 categories          lang devel
 platforms           darwin
 supported_archs     i386 x86_64
 # https://github.com/mozilla/rust/issues/2024
 universal_variant   no
 license             {MIT Apache-2} BSD zlib NCSA Permissive
-maintainers         g5pw openmaintainer
+maintainers         g5pw larryv
 
 description         Compiler for the Rust programming language
 long_description    This is a compiler for Rust, including standard \
                     libraries, tools and documentation.
 homepage            http://www.rust-lang.org
 
-# ===== stage0 snapshot compiler =====
-set stage0(date)                2012-12-19
-set stage0(rev)                 8554d5e
-set stage0(platform)            macos-${configure.build_arch}
+
+# stage0 snapshot compiler, see src/snapshots.txt in dist
+set stage0(date)            2012-12-19
+set stage0(rev)             8554d5e
+set stage0(platform)        macos-${configure.build_arch}
 switch ${configure.build_arch} {
     i386 {
-        set stage0(hash)        151ff211c01f0b7a1895b93ff0bc021bf1472346
-        set stage0(rmd160)      300b17458073a8704817821bd5406189a264f765
-        set stage0(sha256)      5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
+        set stage0(hash)    151ff211c01f0b7a1895b93ff0bc021bf1472346
+        set stage0(rmd160)  300b17458073a8704817821bd5406189a264f765
+        set stage0(sha256)  5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
     }
     x86_64 {
-        set stage0(hash)        e4564933f11b17f7dbd25b61032233693da21dc5
-        set stage0(rmd160)      3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
-        set stage0(sha256)      a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
+        set stage0(hash)    e4564933f11b17f7dbd25b61032233693da21dc5
+        set stage0(rmd160)  3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
+        set stage0(sha256)  a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
     }
 }
-# ====================================
-
 set stage0(dist) [join "rust stage0 ${stage0(date)} ${stage0(rev)}
                         ${stage0(platform)} ${stage0(hash)}" -].tar.bz2
+
 
 master_sites        http://dl.rust-lang.org/dist:dist \
                     http://static.rust-lang.org/stage0-snapshots:stage0
@@ -61,14 +61,16 @@ post-extract {
 }
 
 patchfiles          patch-configure.diff \
-                    patch-src-etc-local_stage0.sh.diff
+                    patch-src-etc-local_stage0.sh.diff \
+                    patch-src-librusti-rusti.rc.diff \
+                    patch-src-rustllvm-RustWrapper.cpp.diff
 post-patch {
     reinplace "s/__BUILD_ARCH__/${configure.build_arch}/g" \
         ${worksrcpath}/configure
 }
 
-# Upstream only supports GCC 4.4 and newer and Clang based on LLVM
-# 3.0svn and newer.
+# Upstream only supports gcc 4.4 and newer and clang based on LLVM
+# 3.0svn and newer. The allowed clang build could probably be tightened.
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     apple-gcc-4.0 apple-gcc-4.2 \
                     llvm-gcc-4.2 macports-llvm-gcc-4.2 \
@@ -98,5 +100,6 @@ build.args          CC=${configure.cc} \
 
 destroot.args       VERBOSE=1
 
-livecheck.url       ${homepage}/
-livecheck.regex     "/release-(\\d\.\\d)/"
+livecheck.type      regex
+livecheck.url       ${homepage}
+livecheck.regex     {/release-(\d\.\d)/}
