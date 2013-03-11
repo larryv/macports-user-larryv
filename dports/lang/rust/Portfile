@@ -21,7 +21,7 @@ long_description    This is a compiler for Rust, including standard \
 homepage            http://www.rust-lang.org
 
 
-# stage0 snapshot compiler, see src/snapshots.txt in dist
+# stage0 snapshot compiler, see src/snapshots.txt in main distribution
 set stage0(date)            2012-12-19
 set stage0(rev)             8554d5e
 set stage0(platform)        macos-${configure.build_arch}
@@ -37,25 +37,26 @@ switch ${configure.build_arch} {
         set stage0(sha256)  a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
     }
 }
-set stage0(dist) [join "rust stage0 ${stage0(date)} ${stage0(rev)}
-                        ${stage0(platform)} ${stage0(hash)}" -].tar.bz2
+set stage0(distfile)        [join "rust stage0 ${stage0(date)} ${stage0(rev)}
+                                ${stage0(platform)} ${stage0(hash)}" -].tar.bz2
+set stage0(distdir)         rust-stage0
 
 
 master_sites        http://dl.rust-lang.org/dist:dist \
                     http://static.rust-lang.org/stage0-snapshots:stage0
 distfiles           ${distname}${extract.suffix}:dist \
-                    ${stage0(dist)}:stage0
+                    ${stage0(distfile)}:stage0
 checksums           ${distname}${extract.suffix} \
                         rmd160  b4988da7be984aa1337f4076e96e6d0c72e3170d \
                         sha256  d326d22707f0562d669c11efbc33ae812ddbf76ab78f07087fc5beb095a8928a \
-                    ${stage0(dist)} \
+                    ${stage0(distfile)} \
                         rmd160  ${stage0(rmd160)} \
                         sha256  ${stage0(sha256)}
 
 depends_extract     bin:bzip2:bzip2
-extract.only-delete ${stage0(dist)}
+extract.only-delete ${stage0(distfile)}
 post-extract {
-    set expand "bzip2 -dc ${distpath}/${stage0(dist)}"
+    set expand "bzip2 -dc ${distpath}/${stage0(distfile)}"
     set untar "${portutil::autoconf::tar_command} -xf -"
     system -W ${workpath} "${expand} | ${untar}"
 }
@@ -69,6 +70,11 @@ post-patch {
         ${worksrcpath}/configure
 }
 
+# Required until we figure out how to use MacPorts' LLVM instead of the
+# bundled one. Using MacPorts' LLVM currently results in a stage2
+# compiler that segfaults during the build (with llvm-3.2, at least).
+depends_build       bin:python2.7:python27
+
 # Upstream only supports gcc 4.4 and newer and clang based on LLVM
 # 3.0svn and newer. The allowed clang build could probably be tightened.
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
@@ -76,8 +82,6 @@ compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     llvm-gcc-4.2 macports-llvm-gcc-4.2 \
                     macports-gcc-4.2 macports-gcc-4.3 \
                     {clang <= 77} macports-clang-2.9
-
-# Use MacPorts' clang as fallback compiler.
 # TODO: Remove when base fallback lists are updated (2.2?).
 compiler.fallback-append            macports-clang-3.2
 if {${configure.compiler} == "macports-clang-3.2"} {
@@ -87,16 +91,20 @@ if {${configure.compiler} == "macports-clang-3.2"} {
 
 configure.args      --disable-docs \
                     --enable-local-rust \
-                    --local-rust-root=${workpath}/rust-stage0
-
+                    --local-rust-root=${workpath}/${stage0(distdir)}
 if {[string match *clang* ${configure.compiler}]} {
     configure.args-append   --enable-clang
 }
 
-build.args          CC=${configure.cc} \
+build.type          gnu
+build.args          VERBOSE=1 \
+                    CC=${configure.cc} \
                     CXX=${configure.cxx} \
-                    CPP="${configure.cc} -E" \
-                    VERBOSE=1
+                    CPP="${configure.cc} -E"
+
+test.run            yes
+test.target         check
+test.env            VERBOSE=1
 
 destroot.args       VERBOSE=1
 
