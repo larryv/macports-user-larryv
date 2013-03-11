@@ -107,6 +107,13 @@ test.target         check
 test.env            VERBOSE=1
 
 destroot.args       VERBOSE=1
+post-destroot {
+    foreach dir {after/syntax ftdetect indent syntax} {
+        xinstall -d ${destroot}${prefix}/share/vim/vimfiles/${dir}
+        xinstall -m 644 ${worksrcpath}/src/etc/vim/${dir}/rust.vim \
+            ${destroot}${prefix}/share/vim/vimfiles/${dir}
+    }
+}
 
 livecheck.type      regex
 livecheck.url       ${homepage}
