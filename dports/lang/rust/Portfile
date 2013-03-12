@@ -127,10 +127,10 @@ post-destroot {
     # Remove zero-byte libraries until
     # https://github.com/mozilla/rust/issues/4468 is resolved, possibly
     # in the 0.6 release.
-    delete ${destroot}${prefix}/lib/libcargo.dylib
-    delete ${destroot}${prefix}/lib/librustc.dylib
-    delete ${destroot}${prefix}/lib/librustdoc.dylib
-    delete ${destroot}${prefix}/lib/librusti.dylib
+    delete ${destroot}${prefix}/lib/libcargo.dylib \
+        ${destroot}${prefix}/lib/librustc.dylib \
+        ${destroot}${prefix}/lib/librustdoc.dylib \
+        ${destroot}${prefix}/lib/librusti.dylib
 }
 
 livecheck.type      regex
