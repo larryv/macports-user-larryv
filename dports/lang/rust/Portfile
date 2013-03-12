@@ -86,7 +86,7 @@ depends_build       bin:perl:perl5 \
 
 # Upstream only supports gcc 4.4 and newer and clang based on LLVM
 # 3.0svn and newer. The clang restriction could probably be tighter;
-# clang-77 is Apple Clang 1.7 (LLVM 2.9svn), included with Xcode 3.2.6.
+# clang-77 is Apple Clang 1.7 (LLVM 2.9svn) from Xcode 3.2.6.
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     apple-gcc-4.0 apple-gcc-4.2 \
                     llvm-gcc-4.2 macports-llvm-gcc-4.2 \
@@ -124,13 +124,13 @@ post-destroot {
             ${destroot}${prefix}/share/vim/vimfiles/${dir}
     }
 
-    # Remove empty libraries until https://github.com/mozilla/rust/issues/4468
-    # is resolved, possibly in the 0.6 release.
-    foreach library {libcargo librustc librustdoc librusti} {
-        if {[file size ${destroot}${prefix}/lib/${library}.dylib] == 0} {
-            delete ${destroot}${prefix}/lib/${library}.dylib
-        }
-    }
+    # Remove zero-byte libraries until
+    # https://github.com/mozilla/rust/issues/4468 is resolved, possibly
+    # in the 0.6 release.
+    delete ${destroot}${prefix}/lib/libcargo.dylib
+    delete ${destroot}${prefix}/lib/librustc.dylib
+    delete ${destroot}${prefix}/lib/librustdoc.dylib
+    delete ${destroot}${prefix}/lib/librusti.dylib
 }
 
 livecheck.type      regex
