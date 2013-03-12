@@ -123,6 +123,14 @@ post-destroot {
         xinstall -m 644 ${worksrcpath}/src/etc/vim/${dir}/rust.vim \
             ${destroot}${prefix}/share/vim/vimfiles/${dir}
     }
+
+    # Remove empty libraries until https://github.com/mozilla/rust/issues/4468
+    # is resolved, possibly in the 0.6 release.
+    foreach library {libcargo librustc librustdoc librusti} {
+        if {[file size ${destroot}${prefix}/lib/${library}.dylib] == 0} {
+            delete ${destroot}${prefix}/lib/${library}.dylib
+        }
+    }
 }
 
 livecheck.type      regex
