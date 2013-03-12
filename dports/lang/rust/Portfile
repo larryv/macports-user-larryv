@@ -15,10 +15,16 @@ universal_variant   no
 license             {MIT Apache-2} BSD zlib NCSA Permissive
 maintainers         g5pw larryv
 
-description         Compiler for the Rust programming language
-long_description    This is a compiler for Rust, including standard \
-                    libraries, tools and documentation.
-homepage            http://www.rust-lang.org
+description         A safe, concurrent, practical language
+long_description    Rust is a curly-brace, block-structured expression \
+                    language. It visually resembles the C language \
+                    family, but differs significantly in syntactic and \
+                    semantic details. Its design is oriented toward \
+                    concerns of “programming in the large”, that is, of \
+                    creating and maintaining boundaries – both abstract \
+                    and operational – that preserve large-system \
+                    integrity, availability and concurrency.
+homepage            http://www.rust-lang.org/
 
 
 # stage0 snapshot compiler, see src/snapshots.txt in main distribution
@@ -70,13 +76,17 @@ post-patch {
         ${worksrcpath}/configure
 }
 
-# Required until we figure out how to use MacPorts' LLVM instead of the
-# bundled one. Using MacPorts' LLVM currently results in a stage2
-# compiler that segfaults during the build (with llvm-3.2, at least).
-depends_build       bin:python2.7:python27
+# Using MacPorts' LLVM currently results in a stage2 compiler that
+# segfaults during the build (with llvm-3.2, at least); until we fix
+# this, we need Python. The weird dependency is to accommodate older
+# systems that only have Python 2.6; if we have to provide our own, we'd
+# rather install 2.7. The build itself will detect either.
+depends_build       bin:perl:perl5 \
+                    bin:python2.6:python27
 
 # Upstream only supports gcc 4.4 and newer and clang based on LLVM
-# 3.0svn and newer. The allowed clang build could probably be tightened.
+# 3.0svn and newer. The clang restriction could probably be tighter;
+# clang-77 is Apple Clang 1.7 (LLVM 2.9svn), included with Xcode 3.2.6.
 compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     apple-gcc-4.0 apple-gcc-4.2 \
                     llvm-gcc-4.2 macports-llvm-gcc-4.2 \
