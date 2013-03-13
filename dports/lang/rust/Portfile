@@ -21,27 +21,27 @@ long_description    Rust is a curly-brace, block-structured expression \
                     family, but differs significantly in syntactic and \
                     semantic details. Its design is oriented toward \
                     concerns of “programming in the large”, that is, of \
-                    creating and maintaining boundaries – both abstract \
-                    and operational – that preserve large-system \
+                    creating and maintaining boundaries — both abstract \
+                    and operational — that preserve large-system \
                     integrity, availability and concurrency.
 homepage            http://www.rust-lang.org/
 
 
-# stage0 snapshot compiler, see src/snapshots.txt in main distribution
+# Select the snapshot compiler; see src/snapshots.txt in main
+# distribution. Use the 64-bit snapshot on x86_64, even if we're
+# ultimately targeting i386.
 set stage0(date)            2012-12-19
 set stage0(rev)             8554d5e
-set stage0(platform)        macos-${configure.build_arch}
-switch ${configure.build_arch} {
-    i386 {
-        set stage0(hash)    151ff211c01f0b7a1895b93ff0bc021bf1472346
-        set stage0(rmd160)  300b17458073a8704817821bd5406189a264f765
-        set stage0(sha256)  5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
-    }
-    x86_64 {
-        set stage0(hash)    e4564933f11b17f7dbd25b61032233693da21dc5
-        set stage0(rmd160)  3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
-        set stage0(sha256)  a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
-    }
+if {[sysctl hw.cpu64bit_capable]} {
+    set stage0(platform)    macos-x86_64
+    set stage0(hash)        e4564933f11b17f7dbd25b61032233693da21dc5
+    set stage0(rmd160)      3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
+    set stage0(sha256)      a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
+} else {
+    set stage0(platform)    macos-i386
+    set stage0(hash)        151ff211c01f0b7a1895b93ff0bc021bf1472346
+    set stage0(rmd160)      300b17458073a8704817821bd5406189a264f765
+    set stage0(sha256)      5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
 }
 set stage0(distfile)        [join "rust stage0 ${stage0(date)} ${stage0(rev)}
                                 ${stage0(platform)} ${stage0(hash)}" -].tar.bz2
@@ -81,8 +81,10 @@ post-patch {
 # this, we need Python. The weird dependency is to accommodate older
 # systems that only have Python 2.6; if we have to provide our own, we'd
 # rather install 2.7. The build itself will detect either.
-depends_build       bin:perl:perl5 \
-                    bin:python2.6:python27
+depends_build           bin:perl:perl5 \
+                        bin:python2.6:python27
+depends_skip_archcheck  perl5 \
+                        python27
 
 # Upstream only supports gcc 4.4 and newer and clang based on LLVM
 # 3.0svn and newer. The clang restriction could probably be tighter;
@@ -92,11 +94,19 @@ compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
                     llvm-gcc-4.2 macports-llvm-gcc-4.2 \
                     macports-gcc-4.2 macports-gcc-4.3 \
                     {clang <= 77} macports-clang-2.9
-# TODO: Remove when base fallback lists are updated (2.2?).
-compiler.fallback-append            macports-clang-3.2
-if {${configure.compiler} == "macports-clang-3.2"} {
-    depends_build-append            port:clang-3.2
-    depends_skip_archcheck-append   clang-3.2
+# TODO: Remove when automatic compiler dependencies and new fallback
+# lists are released (2.2?).
+compiler.fallback-append                macports-clang-3.2
+if {[info exists portconfigure::compiler_name_map(${configure.compiler})]} {
+    set compiler $portconfigure::compiler_name_map(${configure.compiler})
+    if {[string first macports-gcc- ${configure.compiler}] == 0} {
+        depends_lib-append              port:${compiler}
+    } else {
+        depends_build-append            port:${compiler}
+    }
+    if {[portconfigure::arch_flag_supported ${configure.compiler}]} {
+        depends_skip_archcheck-append   ${compiler}
+    }
 }
 
 configure.args      --disable-docs \
