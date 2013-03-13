@@ -27,21 +27,21 @@ long_description    Rust is a curly-brace, block-structured expression \
 homepage            http://www.rust-lang.org/
 
 
-# Select the snapshot compiler; see src/snapshots.txt in main
-# distribution. Use the 64-bit snapshot on x86_64, even if we're
-# ultimately targeting i386.
+# Select the snapshot compiler; see src/snapshots.txt in distribution.
 set stage0(date)            2012-12-19
 set stage0(rev)             8554d5e
-if {[sysctl hw.cpu64bit_capable]} {
-    set stage0(platform)    macos-x86_64
-    set stage0(hash)        e4564933f11b17f7dbd25b61032233693da21dc5
-    set stage0(rmd160)      3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
-    set stage0(sha256)      a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
-} else {
-    set stage0(platform)    macos-i386
-    set stage0(hash)        151ff211c01f0b7a1895b93ff0bc021bf1472346
-    set stage0(rmd160)      300b17458073a8704817821bd5406189a264f765
-    set stage0(sha256)      5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
+set stage0(platform)        macos-${configure.build_arch}
+switch ${configure.build_arch} {
+    x86_64 {
+        set stage0(hash)    e4564933f11b17f7dbd25b61032233693da21dc5
+        set stage0(rmd160)  3d966bd2d17e3f2c74ed78f3674439c89d5a16ee
+        set stage0(sha256)  a2e287a683128e2e213e11c5b9f92e5e628eb63163591d61523549deb2e21f7d
+    }
+    i386 {
+        set stage0(hash)    151ff211c01f0b7a1895b93ff0bc021bf1472346
+        set stage0(rmd160)  300b17458073a8704817821bd5406189a264f765
+        set stage0(sha256)  5e598d4c45ee2dd8b7f2b69d92f60d16e57991e796d76ca255a612357a5e48e0
+    }
 }
 set stage0(distfile)        [join "rust stage0 ${stage0(date)} ${stage0(rev)}
                                 ${stage0(platform)} ${stage0(hash)}" -].tar.bz2
@@ -138,6 +138,9 @@ post-destroot {
         xinstall -m 644 ${worksrcpath}/src/etc/vim/${dir}/rust.vim \
             ${destroot}${prefix}/share/vim/vimfiles/${dir}
     }
+    xinstall -d ${destroot}${prefix}/share/${name}
+    xinstall -m 644 ${worksrcpath}/src/etc/ctags.rust \
+        ${destroot}${prefix}/share/${name}
 
     # Remove zero-byte libraries until
     # https://github.com/mozilla/rust/issues/4468 is resolved.
