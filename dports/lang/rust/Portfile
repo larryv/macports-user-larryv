@@ -99,8 +99,7 @@ post-patch {
 # rather install 2.7. The build itself will detect either.
 depends_build           bin:perl:perl5 \
                         bin:python2.6:python27
-depends_skip_archcheck  perl5 \
-                        python27
+depends_skip_archcheck  python27
 
 # TODO: Remove when automatic compiler dependencies are released (2.2?).
 if {[info exists portconfigure::compiler_name_map(${configure.compiler})]} {
