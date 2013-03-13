@@ -82,8 +82,8 @@ patchfiles              patch-configure.diff \
                         patch-src-etc-local_stage0.sh.diff \
                         patch-src-librusti-rusti.rc.diff \
                         patch-src-rustllvm-RustWrapper.cpp.diff
-# Non-Apple GCC doesn't accept -Wnewline-eof.
-# https://github.com/mozilla/rust/issues/4783
+# Non-Apple GCC (and, by extension, DragonEgg) doesn't accept
+# -Wnewline-eof. https://github.com/mozilla/rust/issues/4783
 if {[string first clang ${configure.compiler}] == -1} {
     patchfiles-append   patch-non_apple_gcc.diff
 }
@@ -117,7 +117,7 @@ if {[info exists portconfigure::compiler_name_map(${configure.compiler})]} {
 configure.args      --disable-docs \
                     --enable-local-rust \
                     --local-rust-root=${workpath}/${stage0(distdir)}
-if {[string match *clang* ${configure.compiler}]} {
+if {[string first clang ${configure.compiler}] != -1} {
     configure.args-append   --enable-clang
 }
 
@@ -140,8 +140,7 @@ post-destroot {
     }
 
     # Remove zero-byte libraries until
-    # https://github.com/mozilla/rust/issues/4468 is resolved, possibly
-    # in the 0.6 release.
+    # https://github.com/mozilla/rust/issues/4468 is resolved.
     delete ${destroot}${prefix}/lib/libcargo.dylib \
         ${destroot}${prefix}/lib/librustc.dylib \
         ${destroot}${prefix}/lib/librustdoc.dylib \
