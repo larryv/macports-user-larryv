@@ -1,0 +1,120 @@
+diff --git mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
+index b8cc0a1..1178a52 100644
+--- mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
++++ mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
+@@ -14,7 +14,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -49,7 +48,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+diff --git mk/libuv/ia32/mac/src/libuv/run-tests.target.mk mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
+index be0c2c6..546cef4 100644
+--- mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
++++ mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
+@@ -14,7 +14,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -49,7 +48,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+diff --git mk/libuv/ia32/mac/src/libuv/uv.target.mk mk/libuv/ia32/mac/src/libuv/uv.target.mk
+index 9838606..b978d23 100644
+--- mk/libuv/ia32/mac/src/libuv/uv.target.mk
++++ mk/libuv/ia32/mac/src/libuv/uv.target.mk
+@@ -17,7 +17,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -59,7 +58,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch i386 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+diff --git mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
+index f5930c9..5299d44 100644
+--- mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
++++ mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
+@@ -14,7 +14,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -49,7 +48,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+diff --git mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
+index 4694c7c..b7944b8 100644
+--- mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
++++ mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
+@@ -14,7 +14,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -49,7 +48,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+diff --git mk/libuv/x86_64/mac/src/libuv/uv.target.mk mk/libuv/x86_64/mac/src/libuv/uv.target.mk
+index 385a64c..a2cf5fd 100644
+--- mk/libuv/x86_64/mac/src/libuv/uv.target.mk
++++ mk/libuv/x86_64/mac/src/libuv/uv.target.mk
+@@ -17,7 +17,6 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Debug := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
+@@ -59,7 +58,6 @@ DEFS_Release := '-D_LARGEFILE_SOURCE' \
+ CFLAGS_Release := -Os \
+ 	-gdwarf-2 \
+ 	-fvisibility=hidden \
+-	-Wnewline-eof \
+ 	-arch x86_64 \
+ 	-fno-strict-aliasing \
+ 	-Wall \
