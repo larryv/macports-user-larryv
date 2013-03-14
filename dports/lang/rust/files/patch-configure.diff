@@ -1,7 +1,7 @@
-diff --git configure configure
+diff --git a/configure b/configure
 index f2afa2d..e6c859f 100755
---- configure
-+++ configure
+--- a/configure
++++ b/configure
 @@ -234,17 +234,7 @@ need_cmd sed
  msg "inspecting environment"
  

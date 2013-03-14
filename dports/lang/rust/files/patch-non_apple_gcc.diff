@@ -1,7 +1,7 @@
-diff --git mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
+diff --git a/mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk b/mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
 index b8cc0a1..b72d2da 100644
---- mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
-+++ mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
+--- a/mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
++++ b/mk/libuv/ia32/mac/src/libuv/run-benchmarks.target.mk
 @@ -14,8 +14,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -22,10 +22,10 @@ index b8cc0a1..b72d2da 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/libuv/ia32/mac/src/libuv/run-tests.target.mk mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
+diff --git a/mk/libuv/ia32/mac/src/libuv/run-tests.target.mk b/mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
 index be0c2c6..c48674e 100644
---- mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
-+++ mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
+--- a/mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
++++ b/mk/libuv/ia32/mac/src/libuv/run-tests.target.mk
 @@ -14,8 +14,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -46,10 +46,10 @@ index be0c2c6..c48674e 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/libuv/ia32/mac/src/libuv/uv.target.mk mk/libuv/ia32/mac/src/libuv/uv.target.mk
+diff --git a/mk/libuv/ia32/mac/src/libuv/uv.target.mk b/mk/libuv/ia32/mac/src/libuv/uv.target.mk
 index 9838606..427fca2 100644
---- mk/libuv/ia32/mac/src/libuv/uv.target.mk
-+++ mk/libuv/ia32/mac/src/libuv/uv.target.mk
+--- a/mk/libuv/ia32/mac/src/libuv/uv.target.mk
++++ b/mk/libuv/ia32/mac/src/libuv/uv.target.mk
 @@ -17,8 +17,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -70,10 +70,10 @@ index 9838606..427fca2 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
+diff --git a/mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk b/mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
 index f5930c9..8734156 100644
---- mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
-+++ mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
+--- a/mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
++++ b/mk/libuv/x86_64/mac/src/libuv/run-benchmarks.target.mk
 @@ -14,8 +14,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -94,10 +94,10 @@ index f5930c9..8734156 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
+diff --git a/mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk b/mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
 index 4694c7c..fc93deb 100644
---- mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
-+++ mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
+--- a/mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
++++ b/mk/libuv/x86_64/mac/src/libuv/run-tests.target.mk
 @@ -14,8 +14,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -118,10 +118,10 @@ index 4694c7c..fc93deb 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/libuv/x86_64/mac/src/libuv/uv.target.mk mk/libuv/x86_64/mac/src/libuv/uv.target.mk
+diff --git a/mk/libuv/x86_64/mac/src/libuv/uv.target.mk b/mk/libuv/x86_64/mac/src/libuv/uv.target.mk
 index 385a64c..6a348a1 100644
---- mk/libuv/x86_64/mac/src/libuv/uv.target.mk
-+++ mk/libuv/x86_64/mac/src/libuv/uv.target.mk
+--- a/mk/libuv/x86_64/mac/src/libuv/uv.target.mk
++++ b/mk/libuv/x86_64/mac/src/libuv/uv.target.mk
 @@ -17,8 +17,7 @@ DEFS_Debug := '-D_LARGEFILE_SOURCE' \
  CFLAGS_Debug := -Os \
  	-gdwarf-2 \
@@ -142,10 +142,10 @@ index 385a64c..6a348a1 100644
  	-fno-strict-aliasing \
  	-Wall \
  	-Wendif-labels \
-diff --git mk/platform.mk mk/platform.mk
+diff --git a/mk/platform.mk b/mk/platform.mk
 index d2f8745..12fb7e2 100644
---- mk/platform.mk
-+++ mk/platform.mk
+--- a/mk/platform.mk
++++ b/mk/platform.mk
 @@ -101,8 +101,8 @@ ifneq ($(findstring darwin,$(CFG_OSTYPE)),)
    # approaches welcome!
    #

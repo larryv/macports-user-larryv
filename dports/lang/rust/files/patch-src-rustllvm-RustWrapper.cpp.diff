@@ -9,8 +9,8 @@ Subject: [PATCH] rustllvm: Fix symbol resolution on Mac for rusti. rs=bugfix
 
 diff --git a/src/rustllvm/RustWrapper.cpp b/src/rustllvm/RustWrapper.cpp
 index 86a302e..bb00f04 100644
---- src/rustllvm/RustWrapper.cpp
-+++ src/rustllvm/RustWrapper.cpp
+--- a/src/rustllvm/RustWrapper.cpp
++++ b/src/rustllvm/RustWrapper.cpp
 @@ -290,6 +290,13 @@ void *RustMCJITMemoryManager::getPointerToNamedFunction(const std::string &Name,
    void *Ptr = sys::DynamicLibrary::SearchForAddressOfSymbol(NameStr);
    if (Ptr) return Ptr;

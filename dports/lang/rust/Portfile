@@ -78,6 +78,7 @@ compiler.blacklist  gcc-3.3 gcc-4.0 gcc-4.2 \
 # TODO: Remove when base fallback lists are updated (2.2?).
 compiler.fallback-append    macports-clang-3.2
 
+patch.pre_args          -p1
 patchfiles              patch-configure.diff \
                         patch-src-etc-local_stage0.sh.diff \
                         patch-src-librusti-rusti.rc.diff \

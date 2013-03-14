@@ -9,8 +9,8 @@ Subject: [PATCH] rusti: Perform mode computation. Closes #4230.
 
 diff --git a/src/librusti/rusti.rc b/src/librusti/rusti.rc
 index 906735d..80eedbb 100644
---- src/librusti/rusti.rc
-+++ src/librusti/rusti.rc
+--- a/src/librusti/rusti.rc
++++ b/src/librusti/rusti.rc
 @@ -246,6 +246,9 @@ fn run(repl: Repl, input: ~str) -> Repl {
      debug!("loop checking");
      middle::check_loop::check_crate(ty_cx, crate);
