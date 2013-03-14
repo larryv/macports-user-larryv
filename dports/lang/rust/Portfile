@@ -82,8 +82,9 @@ patchfiles              patch-configure.diff \
                         patch-src-etc-local_stage0.sh.diff \
                         patch-src-librusti-rusti.rc.diff \
                         patch-src-rustllvm-RustWrapper.cpp.diff
-# Non-Apple GCC (and, by extension, DragonEgg) doesn't accept
-# -Wnewline-eof. https://github.com/mozilla/rust/issues/4783
+# Non-Apple GCC - and, by extension, DragonEgg - accepts neither
+# -Wnewline-eof (https://github.com/mozilla/rust/issues/4783)
+# nor -arch (until 4.7).
 if {[string first clang ${configure.compiler}] == -1} {
     patchfiles-append   patch-non_apple_gcc.diff
 }
