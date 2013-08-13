@@ -1,6 +1,6 @@
---- src/configure.in.orig	2013-01-08 12:40:52.000000000 +0100
-+++ src/configure.in	2013-01-08 12:43:26.000000000 +0100
-@@ -838,7 +838,11 @@
+--- src/configure.in.orig	2013-08-04 14:00:50.000000000 -0400
++++ src/configure.in	2013-08-12 22:03:16.000000000 -0400
+@@ -965,7 +965,11 @@
  AC_MSG_RESULT($enable_pythoninterp)
  if test "$enable_pythoninterp" = "yes" -o "$enable_pythoninterp" = "dynamic"; then
    dnl -- find the python executable
@@ -13,7 +13,7 @@
    if test "X$vi_cv_path_python" != "X"; then
  
      dnl -- get its version number
-@@ -917,19 +921,14 @@
+@@ -1049,19 +1053,14 @@
  	    dnl -- delete the lines from make about Entering/Leaving directory
  	    eval "`cd ${PYTHON_CONFDIR} && make -f "${tmp_mkf}" __ | sed '/ directory /d'`"
  	    rm -f -- "${tmp_mkf}"
@@ -32,8 +32,8 @@
 -	      dnl remove -ltermcap, it can conflict with an earlier -lncurses
 -	      vi_cv_path_python_plibs=`echo $vi_cv_path_python_plibs | sed s/-ltermcap//`
 +	      vi_cv_path_python_plibs="-L${PYTHON_CONFDIR} -lpython${vi_cv_var_python_version}"
++	      vi_cv_path_python_plibs="`${vi_cv_path_python}-config --ldflags`"
  	    fi
-+	    vi_cv_path_python_plibs="${vi_cv_path_python_plibs} ${python_BASEMODLIBS} ${python_LIBS} ${python_SYSLIBS} ${python_LINKFORSHARED}"
 +	    dnl remove -ltermcap, it can conflict with an earlier -lncurses
 +	    vi_cv_path_python_plibs=`echo $vi_cv_path_python_plibs | sed s/-ltermcap//`
  	])
