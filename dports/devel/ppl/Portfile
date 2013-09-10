@@ -9,8 +9,8 @@ version             1.0
 revision            1
 categories          devel math
 platforms           darwin
-maintainers         nomaintainer
 license             GPL-3+
+maintainers         nomaintainer
 
 description         Parma Polyhedra Library
 long_description    The Parma Polyhedra Library (PPL) provides numerical \
@@ -29,9 +29,9 @@ long_description    The Parma Polyhedra Library (PPL) provides numerical \
                     analysis via the automatic synthesis of linear ranking \
                     functions.
 
-homepage            http://bugseng.com/products/ppl/
+homepage            http://bugseng.com/products/ppl
 master_sites        http://bugseng.com/products/ppl/download/ftp/releases/${version} \
-                    ftp://ftp.cs.unipr.it/pub/ppl/releases/${version}/
+                    ftp://ftp.cs.unipr.it/pub/ppl/releases/${version}
 use_bzip2           yes
 
 checksums           rmd160  eb239b1ef6eed3963c604cab4c8a9d5d48813c00 \
@@ -45,13 +45,12 @@ patchfiles          gmp-5.1.patch
 
 compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
 compiler.fallback-append    apple-gcc-4.2
-
 if {[regexp clang|llvm ${configure.compiler}]} {
     # As of 'ppl-0.12.1', we need to be careful about use of the
     # '--enable-fpmath' flag! Newer versions of 'clang' will error about
     # '-frounding-math' being unsupported due to '-Werror'. Older
     # versions of 'clang' will just warn about '-frounding-math' despite
-    # '-Werror'. And 'llvm-gcc' does not '-frounding-math' and siliently
+    # '-Werror'. And 'llvm-gcc' does not '-frounding-math' and silently
     # ignores it.
     configure.args-append   --enable-fpmath=no
     configure.ccache        no
