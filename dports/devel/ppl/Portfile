@@ -38,6 +38,8 @@ checksums           rmd160  ec9cbbad753642f6c300c07f3ede592eb63d5e7c \
                     sha256  7fc2ea9332a5eaecbd97348d2ff2d56367fb15bc23019e68401c23a446e82191
 
 depends_build       port:m4
+depends_skip_archcheck-append m4
+
 depends_lib         port:gmp \
                     port:glpk
 
