@@ -40,8 +40,8 @@ checksums           rmd160  22daf06cfc10b69d8b7afbb03baa5f7ec4ed3899 \
 depends_build       port:m4
 depends_skip_archcheck-append m4
 
-depends_lib         port:gmp \
-                    port:glpk
+depends_lib         port:glpk \
+                    port:gmp
 
 compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
 compiler.fallback-append    apple-gcc-4.2
