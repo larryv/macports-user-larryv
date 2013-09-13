@@ -57,6 +57,10 @@ if {[regexp clang|llvm ${configure.compiler}]} {
     configure.distcc        no
 }
 
+# Generate a newer libtool that passes -stdlib when linking dylibs.
+use_autoreconf      yes
+autoreconf.args     --force --verbose
+
 test.run            yes
 test.target         check
 
