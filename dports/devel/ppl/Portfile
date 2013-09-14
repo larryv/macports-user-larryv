@@ -43,6 +43,10 @@ depends_skip_archcheck-append m4
 depends_lib         port:glpk \
                     port:gmp
 
+# Generate a newer libtool that passes -stdlib when linking dylibs.
+use_autoreconf      yes
+autoreconf.args     --force --verbose
+
 compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
 compiler.fallback-append    apple-gcc-4.2
 if {[regexp clang|llvm ${configure.compiler}]} {
@@ -56,10 +60,6 @@ if {[regexp clang|llvm ${configure.compiler}]} {
     configure.ccache        no
     configure.distcc        no
 }
-
-# Generate a newer libtool that passes -stdlib when linking dylibs.
-use_autoreconf      yes
-autoreconf.args     --force --verbose
 
 test.run            yes
 test.target         check
