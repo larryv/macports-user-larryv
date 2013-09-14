@@ -65,5 +65,5 @@ test.run            yes
 test.target         check
 
 livecheck.type      regex
-livecheck.url       ${homepage}Download/
-livecheck.regex     ${name}-(\[0-9.\]+)\\.tar
+livecheck.url       http://bugseng.com/products/ppl/download/ftp/releases
+livecheck.regex     {([\d.]+)/}
