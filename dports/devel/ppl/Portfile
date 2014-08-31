@@ -48,6 +48,9 @@ autoreconf.post_args    --force
 
 compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
 compiler.fallback-append    apple-gcc-4.2
+
+configure.args      --enable-interfaces='cxx c'
+
 if {[regexp clang|llvm ${configure.compiler}]} {
     # As of 'ppl-0.12.1', we need to be careful about use of the
     # '--enable-fpmath' flag! Newer versions of 'clang' will error about
