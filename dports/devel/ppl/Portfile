@@ -43,8 +43,8 @@ depends_lib         port:glpk \
                     port:gmp
 
 # Generate a newer libtool that passes -stdlib when linking dylibs.
-use_autoreconf      yes
-autoreconf.args     --force --verbose
+use_autoreconf          yes
+autoreconf.post_args    --force
 
 compiler.blacklist-append   gcc-3.3 gcc-4.0 apple-gcc-4.0
 compiler.fallback-append    apple-gcc-4.2
