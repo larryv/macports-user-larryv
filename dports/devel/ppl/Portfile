@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                ppl
-version             1.1pre12
+version             1.1
 categories          devel math
 platforms           darwin
 license             GPL-3+
@@ -33,8 +33,8 @@ master_sites        http://bugseng.com/products/ppl/download/ftp/releases/${vers
                     http://bugseng.com/products/ppl/download/ftp/snapshots
 use_xz              yes
 
-checksums           rmd160  22daf06cfc10b69d8b7afbb03baa5f7ec4ed3899 \
-                    sha256  306f2b583cd3091978d0c778f0817fab4199f9504c50ad822faa4e5e75dde9af
+checksums           rmd160  2c7b72a527af9d852a150a80d094a168c4a58ae5 \
+                    sha256  c48ccd74664ec2cd3cdb5e37f287974ccb062f0384dc658d4053c424b19ad178
 
 depends_build       port:m4
 depends_skip_archcheck-append m4
